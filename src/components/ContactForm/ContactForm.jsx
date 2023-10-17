@@ -3,13 +3,13 @@ import styles from './ContactForm.module.css';
 
 function ContactForm({ onAddContact }) {
   const [name, setName] = useState('');
-  const [number, setNumber] = useState('');
+  const [phone, setPhone] = useState('');
 
   const onSubmit = e => {
     e.preventDefault();
-    onAddContact(name, number);
+    onAddContact(name, phone);
     setName('');
-    setNumber('');
+    setPhone('');
   };
 
   const handleNameChange = e => {
@@ -27,7 +27,7 @@ function ContactForm({ onAddContact }) {
 
   const handleNumberChange = e => {
     const formattedNumber = formatPhoneNumber(e.target.value);
-    setNumber(formattedNumber);
+    setPhone(formattedNumber);
   };
 
   return (
@@ -45,9 +45,9 @@ function ContactForm({ onAddContact }) {
         />
         <input
           type="tel"
-          name="number"
+          name="phone"
           required
-          value={number}
+          value={phone}
           onChange={handleNumberChange}
           placeholder="Phone Number"
           className={styles.inputStyle}

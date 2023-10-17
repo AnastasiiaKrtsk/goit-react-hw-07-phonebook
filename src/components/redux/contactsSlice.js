@@ -45,7 +45,7 @@ const contactsSlice = createSlice({
       })
       .addCase(fetchContacts.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.contacts = action.payload;
+        state.items = action.payload; // Corrected field assignment
       })
       .addCase(fetchContacts.rejected, (state, action) => {
         state.isLoading = false;
@@ -55,5 +55,4 @@ const contactsSlice = createSlice({
 
 export const { addContact, deleteContact, updateFilter } =
   contactsSlice.actions;
-
-export default contactsSlice.reducer;
+export default contactsSlice;

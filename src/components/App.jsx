@@ -7,7 +7,7 @@ import {
   updateFilter,
 } from './redux/contactsSlice';
 
-import { nanoid } from 'nanoid';
+// import { nanoid } from 'nanoid';
 import ContactForm from './ContactForm/ContactForm';
 import Contacts from './Contacts/Contacts';
 
@@ -15,15 +15,15 @@ function App() {
   const dispatch = useDispatch();
   const contacts = useSelector(state => state.contacts.items);
   const filter = useSelector(state => state.contacts.filter);
-  const isLoading = useSelector(state => state.contacts.isLoading);
-  const error = useSelector(state => state.contacts.error);
+  // const isLoading = useSelector(state => state.contacts.isLoading);
+  // const error = useSelector(state => state.contacts.error);
 
   useEffect(() => {
     dispatch(fetchContacts());
   }, [dispatch]);
 
-  const handleAddContact = (name, number) => {
-    dispatch(addContact({ id: nanoid(), name, number }));
+  const handleAddContact = (name, phone) => {
+    dispatch(addContact({ name, phone }));
   };
 
   const onDeleteContact = id => {
