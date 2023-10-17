@@ -30,7 +30,6 @@ export const addContacts = createAsyncThunk(
   async (newContact, thunkAPI) => {
     try {
       const response = await axios.post('/contacts', newContact);
-      console.log(response.data);
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -93,7 +92,6 @@ const contactsSlice = createSlice({
         state.error = null;
       })
       .addCase(addContacts.fulfilled, (state, action) => {
-        console.log(action.payload);
         state.isLoading = false;
         state.items = [...state.items, action.payload];
       })
