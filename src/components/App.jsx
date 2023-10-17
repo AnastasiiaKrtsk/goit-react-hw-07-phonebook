@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
-  addContact,
+  addContacts,
   deleteContact,
   fetchContacts,
   updateFilter,
@@ -23,7 +23,7 @@ function App() {
   }, [dispatch]);
 
   const handleAddContact = (name, phone) => {
-    dispatch(addContact({ name, phone }));
+    dispatch(addContacts({ name, phone }));
   };
 
   const onDeleteContact = id => {

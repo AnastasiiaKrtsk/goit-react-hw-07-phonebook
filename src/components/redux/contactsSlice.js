@@ -14,6 +14,29 @@ export const fetchContacts = createAsyncThunk(
     }
   }
 );
+export const deleteContacts = createAsyncThunk(
+  'contacts/deleteContacts',
+  async (contactId, thunkAPI) => {
+    try {
+      const response = await axios.delete(`/contacts/${contactId}`);
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+export const addContacts = createAsyncThunk(
+  'contacts/addContacts',
+  async (newContact, thunkAPI) => {
+    try {
+      const response = await axios.post('/contacts', newContact);
+      console.log(response.data);
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
 
 const contactsSlice = createSlice({
   name: 'contacts',
@@ -45,9 +68,36 @@ const contactsSlice = createSlice({
       })
       .addCase(fetchContacts.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.items = action.payload; // Corrected field assignment
+        state.items = action.payload;
       })
       .addCase(fetchContacts.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+      })
+      .addCase(deleteContacts.pending, (state, action) => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(deleteContacts.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.items = state.items = state.items.filter(
+          contact => contact.id !== action.payload.id
+        );
+      })
+      .addCase(deleteContacts.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+      })
+      .addCase(addContacts.pending, (state, action) => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(addContacts.fulfilled, (state, action) => {
+        console.log(action.payload);
+        state.isLoading = false;
+        state.items = [...state.items, action.payload];
+      })
+      .addCase(addContacts.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload;
       }),
