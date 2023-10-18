@@ -5,7 +5,7 @@ import {
   deleteContact,
   fetchContacts,
   updateFilter,
-} from './redux/contactsSlice';
+} from '../redux/contactsSlice';
 
 // import { nanoid } from 'nanoid';
 import ContactForm from './ContactForm/ContactForm';
